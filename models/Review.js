@@ -1,6 +1,5 @@
-import sequelize, { Sequelize } from "sequelize";
-// "../ significa "volte uma pasta" ele vai sair da pasta e procurar em ouuutra pasta"
-import connection from "../config/db.js";
+import Sequelize from 'sequelize';
+import connection from '../config/db.js';
 
 const Review = connection.define(
     'review',
@@ -9,21 +8,29 @@ const Review = connection.define(
             type: Sequelize.INTEGER,
             autoIncrement: true,
             allowNull: false,
-            primaryKey: true
+            primaryKey: true    
         },
-        userId: {
+        idUser: {
             type: Sequelize.INTEGER,
-            allowNull: false
+            allowNull: false,
+            references: {
+                model: 'users',
+                key: 'id'
+            }
         },
-        idRestaurant:{
+        idRestaurant: {
             type: Sequelize.INTEGER,
-            allowNull: false
-         },
-        Comment:{
+            allowNull: false,
+            references: {
+                model: 'restaurants',
+                key: 'id'
+            }
+        },
+        comment: {
             type: Sequelize.STRING,
             allowNull: false
         },
-        stars:{
+        stars: {
             type: Sequelize.INTEGER,
             allowNull: false
         }
